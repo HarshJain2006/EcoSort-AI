@@ -3,6 +3,7 @@ from flask import Flask, request, jsonify
 from werkzeug.utils import secure_filename
 from pathlib import Path
 import subprocess
+import os
 import re
 import uuid
 import time
@@ -14,7 +15,7 @@ app = Flask(__name__)
 # Configuration
 # --------------------------------------------------
 
-BASE_DIR = Path("/home/hj/waste-ai")
+BASE_DIR = Path(os.environ.get("ECOSORT_BASE_DIR", "/home/pi/waste-ai")).expanduser()
 CLASSIFIER = BASE_DIR / "et_cpp_check/build/waste_classifier"
 UPLOAD_DIR = BASE_DIR / "web_demo/uploads"
 
@@ -253,7 +254,7 @@ def health():
         "status": "ok" if available else "error",
         "rpi_connected": available,
         "dev_mode": False,
-        "rpi_ip": "192.168.29.6",
+        "rpi_ip": os.environ.get("ECOSORT_PI_HOST", "raspberrypi.local"),
         "rpi_port": 5000,
         "classifier_available": available,
         "project": "EcoSort AI"
