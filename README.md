@@ -259,6 +259,39 @@ The technical handoff is part of this repository—not a separate private docume
 - Pi directory layout, API contract and frontend integration.
 - Demo startup instructions, exclusions and remaining verification items.
 
+
+## 📸 Project Gallery
+
+A few views from the working prototype and its Raspberry Pi deployment.
+
+<p align="center">
+  <img src="assets/screenshots/01-homepage.png" alt="EcoSort AI homepage" width="48%">
+  <img src="assets/screenshots/02-scanner-upload.png" alt="EcoSort AI image scanner" width="48%">
+</p>
+
+<p align="center">
+  <img src="assets/screenshots/03-plastic-classification.png" alt="Plastic classification result" width="48%">
+  <img src="assets/screenshots/04-organic-classification.png" alt="Organic classification result" width="48%">
+</p>
+
+### Raspberry Pi hardware
+
+<p align="center">
+  <img src="assets/screenshots/05-raspberry-pi-hardware.jpg" alt="Raspberry Pi 3 Model B used for edge inference" width="52%">
+</p>
+
+### Demo video
+
+[▶ Watch the EcoSort AI demo recording (2 min 6 sec)](assets/demo/ecosort-ai-demo.mp4)
+
+The recording walks through the web experience and the classification guidance shown by the prototype.
+
+## 👥 Project Team
+
+**Developed by:** Harsh, Sanjeevani, and Varnika.
+
+Built for the **Namma AI Hackathon**.
+
 ## 🔐 Repository and reuse notes
 
 - Do not commit credentials, Wi-Fi passwords, API keys, private environment files, raw datasets, user uploads, virtual environments or generated build folders.
