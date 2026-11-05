@@ -30,17 +30,3 @@ See [TECHNICAL_HANDOFF.md](TECHNICAL_HANDOFF.md) for the engineering handoff.
 - The 0.30 softmax threshold is provisional, not calibrated out-of-distribution detection.
 - E-waste is not a separate class.
 
-## Suggested structure
-
-```text
-frontend/                 React + Vite UI
-raspberry_pi/backend/      Flask API
-raspberry_pi/inference/    C++ ExecuTorch classifier
-raspberry_pi/models/       .pte model + labels
-training/                 dataset preparation and scripts
-README.md
-TECHNICAL_HANDOFF.md
-.gitignore
-```
-
-Do not commit `.env`, credentials, raw datasets, Python virtual environments, `node_modules`, personal uploads, or build output. Add the final model only after checking licensing and GitHub file-size constraints.
