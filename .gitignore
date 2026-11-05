@@ -41,3 +41,6 @@ temp/
 checkpoints/
 *.pth
 *.pt
+
+# Private local-only files — never upload to GitHub
+private/
