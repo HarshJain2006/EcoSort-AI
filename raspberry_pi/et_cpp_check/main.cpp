@@ -13,7 +13,7 @@ using executorch::runtime::EValue;
 int main() {
     // 1. Load the ExecuTorch model
     const std::string model_path =
-        "/home/hj/waste-ai/models/add.pte";
+        "/home/pi/waste-ai/models/add.pte";
 
     Module module(model_path);
 
