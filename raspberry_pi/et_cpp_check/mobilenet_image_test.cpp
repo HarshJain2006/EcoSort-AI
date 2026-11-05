@@ -20,13 +20,13 @@ using executorch::runtime::EValue;
 
 // Model and file paths
 const std::string MODEL_PATH =
-    "/home/hj/waste-ai/models/mobilenet_pretrained.pte";
+    "/home/pi/waste-ai/models/mobilenet_pretrained.pte";
 
 const std::string LABELS_PATH =
-    "/home/hj/waste-ai/models/imagenet_classes.txt";
+    "/home/pi/waste-ai/models/imagenet_classes.txt";
 
 const std::string DEFAULT_IMAGE =
-    "/home/hj/waste-ai/test_images/test.jpg";
+    "/home/pi/waste-ai/test_images/test.jpg";
 
 // ImageNet normalization values
 const float MEAN[3] = {0.485f, 0.456f, 0.406f};
