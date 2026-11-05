@@ -194,7 +194,7 @@ python app.py
 
 The Flask API listens on port `5000`.
 
-> **Path configuration:** the current Flask and C++ source files use the absolute base path `/home/hj/waste-ai`. Update those paths if you deploy under a different Linux username or directory.
+> **Path configuration:** the Flask app and C++ classifier use `ECOSORT_BASE_DIR` as their deployment root. It defaults to `/home/pi/waste-ai`; set it to your actual project directory when deploying elsewhere.
 
 ### 2. Start the frontend on Windows
 
