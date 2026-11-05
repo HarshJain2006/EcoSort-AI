@@ -101,7 +101,7 @@ The checked-in `CMakeLists.txt` finds the installed ExecuTorch package with the 
 | `/api/results` | GET | Recent in-memory history (up to last 50) |
 | `/api/classify` | POST | Compatibility endpoint |
 
-The Flask API uses port 5000. The frontend Vite dev server ran on port 3000 and proxied `/api` to the Pi. Set `VITE_PI_API_URL` in `frontend/.env` to the Pi's reachable hostname or IP and port 5000.
+The Flask API uses port 5000. The frontend Vite dev server ran on port 3000 and proxied `/api` to the Pi. Set `VITE_PI_API_URL` in `frontend/.env` to the Pi's reachable hostname or IP and port 5000. The health response's display host is configurable with `ECOSORT_PI_HOST` (defaults to `raspberrypi.local`).
 
 The integration response included status/detection state, class, confidence/model score and material guidance. Biodegradability/recyclability fields are rule-based guidance; those labels were not learned from dataset ground truth. Preserve the actual response schema from the final backend files.
 
