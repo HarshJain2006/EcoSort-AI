@@ -15,7 +15,7 @@ Browser-based image classification: React frontend uploads an image to a Flask A
 | Memory | About 905 MiB reported by OS |
 | Primary storage | 16 GB microSD |
 | Extra storage | 128 GB USB drive |
-| Network | Ethernet / Wi-Fi; test IP 192.168.29.6 (DHCP can change) |
+| Network | Ethernet / Wi-Fi; configure a hostname or reserved IP for each deployment |
 
 A camera is not required for the browser-upload demo.
 
@@ -71,7 +71,7 @@ Known error: one plastic sample was predicted as cardboard with approximately 94
 
 ## 5. Pi deployment paths observed
 
-In the GitHub repository, these files are stored under `raspberry_pi/`. For the tested Pi layout, copy the contents of that folder into `/home/hj/waste-ai/` so the runtime paths below resolve. The Flask app and C++ classifier currently use absolute paths rooted at `/home/hj/waste-ai`; update both source files if the Linux username or deployment directory changes.
+In the GitHub repository, these files are stored under `raspberry_pi/`. Copy the contents of that folder into a deployment root such as `/home/pi/waste-ai/`, preserving the subfolders. Set `ECOSORT_BASE_DIR` to that root if you use a different location. Both the Flask app and C++ classifier read this environment variable; the default is `/home/pi/waste-ai`.
 
 ```text
 ~/waste-ai/
@@ -81,11 +81,11 @@ In the GitHub repository, these files are stored under `raspberry_pi/`. For the 
   web_demo/app.py
 ```
 
-Classifier executable: `/home/hj/waste-ai/et_cpp_check/build/waste_classifier`
+Classifier executable: `/home/pi/waste-ai/et_cpp_check/build/waste_classifier`
 
-Model: `/home/hj/waste-ai/models/mobilenet_waste.pte`
+Model: `/home/pi/waste-ai/models/mobilenet_waste.pte`
 
-Labels: `/home/hj/waste-ai/models/waste_classes.txt`
+Labels: `/home/pi/waste-ai/models/waste_classes.txt`
 
 The C++ image path resizes to 224x224, converts RGB to NCHW, and applies ImageNet normalization. Its interpolation is close to, but not exactly the same as, torchvision antialias resize.
 
@@ -101,7 +101,7 @@ The checked-in `CMakeLists.txt` finds the installed ExecuTorch package with the 
 | `/api/results` | GET | Recent in-memory history (up to last 50) |
 | `/api/classify` | POST | Compatibility endpoint |
 
-The demo used port 5000 and test IP `192.168.29.6`; this address is temporary unless reserved. The frontend Vite dev server ran on port 3000 and proxied `/api` to the Pi. The checked-in `frontend/vite.config.ts` still contains that development IP; update its proxy target to the current Pi address before running on another network.
+The Flask API uses port 5000. The frontend Vite dev server ran on port 3000 and proxied `/api` to the Pi. Set `VITE_PI_API_URL` in `frontend/.env` to the Pi's reachable hostname or IP and port 5000.
 
 The integration response included status/detection state, class, confidence/model score and material guidance. Biodegradability/recyclability fields are rule-based guidance; those labels were not learned from dataset ground truth. Preserve the actual response schema from the final backend files.
 
@@ -112,7 +112,8 @@ The 0.30 low-softmax-confidence cutoff is provisional. It is not a no-waste or c
 **Raspberry Pi SSH:**
 
 ```bash
-cd ~/waste-ai/web_demo
+export ECOSORT_BASE_DIR=/home/pi/waste-ai
+cd "$ECOSORT_BASE_DIR/web_demo"
 python app.py
 ```
 
