@@ -1,0 +1,43 @@
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets/
+credentials/
+
+# Dependencies
+node_modules/
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+
+# Build and cache
+dist/
+build/
+.cache/
+.vite/
+*.log
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Dataset and temporary data
+dataset/
+datasets/
+data/raw/
+uploads/
+user_uploads/
+tmp/
+temp/
+
+# Local checkpoints (selectively add a licensed, deployable .pte model)
+checkpoints/
+*.pth
+*.pt
