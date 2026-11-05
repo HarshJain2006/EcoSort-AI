@@ -14,7 +14,7 @@ using executorch::runtime::EValue;
 
 int main() {
     const std::string model_path =
-    	"/home/hj/waste-ai/models/mobilenet_pretrained.pte";
+    	"/home/pi/waste-ai/models/mobilenet_pretrained.pte";
     std::cout << "Loading MobileNetV3-Small..." << std::endl;
 
     Module module(model_path);
