@@ -71,6 +71,8 @@ Known error: one plastic sample was predicted as cardboard with approximately 94
 
 ## 5. Pi deployment paths observed
 
+In the GitHub repository, these files are stored under `raspberry_pi/`. For the tested Pi layout, copy the contents of that folder into `/home/hj/waste-ai/` so the runtime paths below resolve. The Flask app and C++ classifier currently use absolute paths rooted at `/home/hj/waste-ai`; update both source files if the Linux username or deployment directory changes.
+
 ```text
 ~/waste-ai/
   models/mobilenet_waste.pte
@@ -87,6 +89,8 @@ Labels: `/home/hj/waste-ai/models/waste_classes.txt`
 
 The C++ image path resizes to 224x224, converts RGB to NCHW, and applies ImageNet normalization. Its interpolation is close to, but not exactly the same as, torchvision antialias resize.
 
+The checked-in `CMakeLists.txt` finds the installed ExecuTorch package with the `kernels_optimized` component and links `executorch::runtime`, `executorch::kernels_optimized`, `executorch::backend_xnnpack`, and `executorch::threadpool`. The compiled `build/waste_classifier` executable is generated on the Pi and is not stored in GitHub.
+
 ## 6. API contract tested
 
 | Endpoint | Method | Purpose |
@@ -97,7 +101,7 @@ The C++ image path resizes to 224x224, converts RGB to NCHW, and applies ImageNe
 | `/api/results` | GET | Recent in-memory history (up to last 50) |
 | `/api/classify` | POST | Compatibility endpoint |
 
-The demo used port 5000 and test IP `192.168.29.6`; this address is temporary unless reserved. The frontend Vite dev server ran on port 3000 and proxied `/api` to the Pi.
+The demo used port 5000 and test IP `192.168.29.6`; this address is temporary unless reserved. The frontend Vite dev server ran on port 3000 and proxied `/api` to the Pi. The checked-in `frontend/vite.config.ts` still contains that development IP; update its proxy target to the current Pi address before running on another network.
 
 The integration response included status/detection state, class, confidence/model score and material guidance. Biodegradability/recyclability fields are rule-based guidance; those labels were not learned from dataset ground truth. Preserve the actual response schema from the final backend files.
 
@@ -130,7 +134,7 @@ Exclude `.env`, credentials, keys, Wi-Fi passwords, `node_modules`, virtual envi
 
 ## 9. Still to verify
 
-- That the repository contains the final tested backend, not an older placeholder/ImageNet fallback.
+- Keep the Pi deployment copy synchronized with the committed `raspberry_pi/` source when changes are made after the hackathon demo.
 - Exact Flask/Pillow dependencies and lockfile.
 - Exact ExecuTorch C++ build flags/dependency setup.
 - Model and dataset redistribution permissions.
