@@ -8,6 +8,7 @@
 #include <algorithm>
 #include <cmath>
 #include <chrono>
+#include <cstdlib>
 
 #include <executorch/extension/module/module.h>
 #include <executorch/extension/tensor/tensor_ptr_maker.h>
@@ -20,11 +21,13 @@ using executorch::runtime::EValue;
 constexpr int INPUT_SIZE = 224;
 constexpr int NUM_CLASSES = 9;
 
-const std::string MODEL_PATH =
-    "/home/hj/waste-ai/models/mobilenet_waste.pte";
+const std::string BASE_DIR = []() {
+    const char* configured = std::getenv("ECOSORT_BASE_DIR");
+    return configured ? std::string(configured) : std::string("/home/pi/waste-ai");
+}();
 
-const std::string LABELS_PATH =
-    "/home/hj/waste-ai/models/waste_classes.txt";
+const std::string MODEL_PATH = BASE_DIR + "/models/mobilenet_waste.pte";
+const std::string LABELS_PATH = BASE_DIR + "/models/waste_classes.txt";
 
 const float MEAN[3] = {0.485f, 0.456f, 0.406f};
 const float STD[3]  = {0.229f, 0.224f, 0.225f};
