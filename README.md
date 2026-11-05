@@ -173,7 +173,7 @@ This repository contains the frontend, Flask source, C++ inference source and ex
 The current Pi source expects this deployment layout:
 
 ```text
-/home/hj/waste-ai/
+/home/pi/waste-ai/
 ├── et_cpp_check/
 │   └── build/waste_classifier
 ├── models/
@@ -198,11 +198,13 @@ The Flask API listens on port `5000`.
 
 ### 2. Start the frontend on Windows
 
-First, open `frontend/vite.config.ts` and change the proxy target to the Raspberry Pi's current IP address:
+Create `frontend/.env` from the committed example and set the Pi API address:
 
-```ts
-target: 'http://<PI_IP>:5000',
+```powershell
+Copy-Item .env.example .env
 ```
+
+Then edit `VITE_PI_API_URL` in `.env`, for example `http://raspberrypi.local:5000` or `http://<PI_IP>:5000`.
 
 **Windows PowerShell:**
 
@@ -214,7 +216,7 @@ npm.cmd run dev
 
 Open the local URL printed by Vite, normally `http://localhost:3000`. The computer running the browser and the Raspberry Pi must be able to communicate over the network.
 
-> The checked-in Vite configuration currently points to the development Pi address `192.168.29.6`. This is a local DHCP address used during the demo; it may change on another network.
+> The Vite proxy reads `VITE_PI_API_URL` from the local `.env` file. The committed `.env.example` uses localhost as a safe starting default; change it to the Pi's reachable hostname or IP before the browser demo.
 
 ## 🔌 API endpoints
 
